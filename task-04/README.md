@@ -1,78 +1,86 @@
-# CineScope Dashboard – SQL Integration Task
+Movie Data ETL and Dashboard Project
 
- **You’ve just joined CineScope Studios as a data intern.**  
- Your mission? Help the team build an interactive movie database visualizer. The frontend is ready — now it’s your job to bring it to life with real data. You’ll import movie records, connect a MySQL database, and make sure everything works smoothly inside the CineScope desktop app.
+This project provides a complete ETL (Extract, Transform, Load) pipeline for processing movie data. It reads data from a CSV file, cleans and transforms it using Python, loads it into a MySQL database, and visualizes the results in an interactive web-based dashboard.
 
----
+ Features
 
-## 🎯 Objective
+    Data Extraction: Reads movie data from a movies.csv source file.
 
-- Learn and apply basic **SQL (MySQL)** skills  
-- Import data from a **CSV file** into a MySQL database using Python  
-- Integrate a **PySide6** UI with the database  
-- Enable exporting of the displayed data to a CSV file
+    Data Transformation: Cleans data, handles missing values, and extracts structured information (like genre and country) using Python's Pandas library.
 
----
+    Data Loading: Initializes a MySQL database and loads the cleaned data into a structured movies table.
 
-## Steps to Run the Project
-1. Set up the virtual environment
-2. Activate the virtual environment
-3. Install dependencies `requirements.txt`
-4. Run the application `python main.py`
+    Interactive Dashboard: A web-based dashboard (likely using a framework like Dash or Streamlit) to visualize key insights from the movie data.
 
+ Installation
 
+To get this project up and running, follow these steps.
 
+    Clone the Repository
+    Bash
 
-## 🗂 What You’re Given
+git clone <your-repository-url>
+cd <repository-directory>
 
-- A `movies.csv` file with movie data  
-- A ready-to-use **PySide6 UI** (`dashboard.py`)  
-- A [demo video](https://github.com/AadarshM07/CineScope-S3/blob/main/demo.mp4) showing the expected functionality
+Set up a Virtual Environment
+It's recommended to use a virtual environment to manage dependencies.
+Bash
 
----
+python -m venv venv
+source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
 
-## 🛠 What You Have to Do
+Install Dependencies
+Install all the required Python libraries using the requirements.txt file.
+Bash
 
-1. **Import Data into MySQL**  
-   Write a Python script (`import_csv.py`) to:  
-   - Create a MySQL table for storing movie data  
-   - Read the contents of `movies.csv`  
-   - Insert the records into the database
+    pip install -r requirements.txt
 
-2. **Connect the UI to MySQL and Implement Functionalities**  
-   The provided UI (`dashboard.py`) is built using PySide6. Your job is to:  
-   - Connect it to your MySQL database using Python (e.g., `PyMySQL` or `mysql-connector-python`)  
-   - Make the **Search** and **Column Selection** buttons functional — they should generate custom queries based on the user's input and selected filters  
-   - Display the resulting data dynamically in the visualizer table
+    Set up MySQL
 
-3. **Export to CSV**  
-   Implement the **Export CSV** button so that:  
-   - It exports the **currently displayed data** from the visualizer table to a new `.csv` file  
-   - The exported file should reflect any applied filters or selections made in the UI
+        Make sure you have a MySQL server installed and running.
 
-4. **Improve the UI**
-   
-   Tinker with the existing PySide6 interface to enhance the layout, responsiveness, and overall user experience.
-   - Bring your creativity out — feel free to redesign or rearrange components for a cleaner and more intuitive interface.
+        Update the database connection details (username, password, host) in the conecshon.py and mysql_init.py files to match your local setup.
 
+Usage
 
----
+Follow these steps to run the complete pipeline.
 
-## 🧠 Prerequisites
+    Initialize the Database
+    Run the mysql_init.py script to create the database and the necessary tables. This only needs to be done once.
+    Bash
 
-Make sure you’re familiar with:
+python mysql_init.py
 
-| Topic | Resource |
-|-------|----------|
-| SQL (MySQL) | [W3Schools SQL Tutorial](https://www.w3schools.com/sql/) |
-| Python + MySQL | [Real Python: MySQL with Python](https://realpython.com/python-mysql/) |
-| PySide6 (Qt for Python) | [Official Docs](https://doc.qt.io/qtforpython/) |
+Run the Main ETL Pipeline
+Execute the main.py script to extract, transform, and load the data from movies.csv into your MySQL database.
+Bash
 
----
-## ✅Submission Guidelines
-- Include your `import_csv.py` script
-- Modify `dashboard.py` with proper integration
-- Make sure the Export CSV button works
-- Submit your updated GitHub repo link
+python main.py
 
+This will also generate a movies_output.csv file with the cleaned data.
 
+Launch the Dashboard
+Start the interactive dashboard to view the data visualizations.
+Bash
+
+    python dashboard.py
+
+    Open your web browser and navigate to the address provided in the terminal (usually http://127.0.0.1:8050).
+
+ File Descriptions
+
+    main.py: The core ETL script. It reads movies.csv, processes the data, saves the cleaned data to movies_output.csv, and loads it into the MySQL database.
+
+    dashboard.py: The script to launch the web-based interactive dashboard for data visualization.
+
+    mysql_init.py: A one-time setup script to create the MySQL database and the movies table schema.
+
+    conecshon.py: A helper module that contains the database connection configuration details used by other scripts.
+
+    movies.csv: The raw, unprocessed input dataset containing movie information.
+
+    movies_output.csv: The cleaned and processed data file generated by main.py.
+
+    requirements.txt: A list of all Python libraries required to run the project (e.g., pandas, sqlalchemy, mysql-connector-python).
+
+    trial.py: A script likely used for testing, experimentation, or developing specific functionalities.
